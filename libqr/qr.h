@@ -319,9 +319,6 @@ QR_API qr_byte_t *qrSymbolToASCII(QRCode *qr, int sep, int mag, int *size);
 QR_API qr_byte_t *qrSymbolToJSON(QRCode *qr, int sep, int mag, int *size);
 QR_API qr_byte_t *qrSymbolToPBM(QRCode *qr, int sep, int mag, int *size);
 QR_API qr_byte_t *qrSymbolToBMP(QRCode *qr, int sep, int mag, int *size);
-QR_API qr_byte_t *qrSymbolToSVG(QRCode *qr, int sep, int mag, int *size);
-QR_API qr_byte_t *qrSymbolToTIFF(QRCode *qr, int sep, int mag, int *size);
-QR_API qr_byte_t *qrSymbolToPNG(QRCode *qr, int sep, int mag, int *size);
 
 /*
  * 構造的連接出力用関数のプロトタイプ
@@ -334,9 +331,6 @@ QR_API qr_byte_t *qrsSymbolsToASCII(QRStructured *st, int sep, int mag, int orde
 QR_API qr_byte_t *qrsSymbolsToJSON(QRStructured *st, int sep, int mag, int order, int *size);
 QR_API qr_byte_t *qrsSymbolsToPBM(QRStructured *st, int sep, int mag, int order, int *size);
 QR_API qr_byte_t *qrsSymbolsToBMP(QRStructured *st, int sep, int mag, int order, int *size);
-QR_API qr_byte_t *qrsSymbolsToSVG(QRStructured *st, int sep, int mag, int order, int *size);
-QR_API qr_byte_t *qrsSymbolsToTIFF(QRStructured *st, int sep, int mag, int order, int *size);
-QR_API qr_byte_t *qrsSymbolsToPNG(QRStructured *st, int sep, int mag, int order, int *size);
 
 #ifdef __cplusplus
 } // extern "C"

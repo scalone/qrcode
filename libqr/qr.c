@@ -2428,11 +2428,11 @@ qrGetSymbol(QRCode *qr, int fmt, int sep, int mag, int *size)
 	int _size;
 
 	static const QRConverter cnv[QR_FMT_COUNT] = {
-		qrSymbolToPNG,
+		0, // qrSymbolToPNG
 		qrSymbolToBMP,
-		qrSymbolToTIFF,
+		0, // qrSymbolToTIFF
 		qrSymbolToPBM,
-		qrSymbolToSVG,
+		0, // qrSymbolToSVG
 		qrSymbolToJSON,
 		qrSymbolToDigit,
 		qrSymbolToASCII
@@ -2529,11 +2529,11 @@ qrsGetSymbols(QRStructured *st, int fmt, int sep, int mag, int order, int *size)
 	int _size;
 
 	static QRsConverter cnv[QR_FMT_COUNT] = {
-		qrsSymbolsToPNG,
+		0, // qrsSymbolsToPNG
 		qrsSymbolsToBMP,
-		qrsSymbolsToTIFF,
+		0, // qrsSymbolsToTIFF,
 		qrsSymbolsToPBM,
-		qrsSymbolsToSVG,
+		0, // qrsSymbolsToSVG,
 		qrsSymbolsToJSON,
 		qrsSymbolsToDigit,
 		qrsSymbolsToASCII

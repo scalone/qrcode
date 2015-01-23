@@ -129,7 +129,7 @@ qrSymbolToBMP(QRCode *qr, int sep, int mag, int *size)
 	sepskips = rsize * sepdim;
 	/* 分離パターン (下) */
 	if (sepskips) {
-		memset(sptr, 0, (size_t)sepskips);
+		memset(sptr, 0xff, (size_t)sepskips);
 		sptr += sepskips;
 	}
 	for (i = dim - 1; i >= 0; i--) {
@@ -138,21 +138,28 @@ qrSymbolToBMP(QRCode *qr, int sep, int mag, int *size)
 		rptr = rbuf;
 		/* 分離パターン (左) */
 		for (j = 0; j < sepdim; j++) {
+			*rptr |= 1 << pxshift;
 			qrBmpNextPixel();
 		}
 		/* シンボル本体 */
 		for (j = 0; j < dim; j++) {
 			if (qrIsBlack(qr, i, j)) {
 				for (jx = 0; jx < mag; jx++) {
-					*rptr |= 1 << pxshift;
 					qrBmpNextPixel();
 				}
 			} else {
 				for (jx = 0; jx < mag; jx++) {
+					*rptr |= 1 << pxshift;
 					qrBmpNextPixel();
 				}
 			}
 		}
+
+		for (j = 0; j < sepdim; j++) {
+			*rptr |= 1 << pxshift;
+			qrBmpNextPixel();
+		}
+
 		/* 行をmag回繰り返し書き込む */
 		for (ix = 0; ix < mag; ix++) {
 			memcpy(sptr, rbuf, (size_t)rsize);
@@ -161,7 +168,7 @@ qrSymbolToBMP(QRCode *qr, int sep, int mag, int *size)
 	}
 	/* 分離パターン (上) */
 	if (sepskips) {
-		memset(sptr, 0, (size_t)sepskips);
+		memset(sptr, 0xff, (size_t)sepskips);
 		sptr += sepskips;
 	}
 
@@ -215,7 +222,7 @@ qrsSymbolsToBMP(QRStructured *st, int sep, int mag, int order, int *size)
 	for (k = rows - 1; k >= 0; k--) {
 		/* 分離パターン (下) */
 		if (sepskips) {
-			memset(sptr, 0, (size_t)sepskips);
+			memset(sptr, 0xff, (size_t)sepskips);
 			sptr += sepskips;
 		}
 		for (i = dim - 1; i >= 0; i--) {
@@ -225,6 +232,7 @@ qrsSymbolsToBMP(QRStructured *st, int sep, int mag, int order, int *size)
 			for (kx = 0; kx < cols; kx++) {
 				/* 分離パターン (左) */
 				for (j = 0; j < sepdim; j++) {
+					*rptr |= 1 << pxshift;
 					qrBmpNextPixel();
 				}
 				/* シンボル本体 */
@@ -239,16 +247,20 @@ qrsSymbolsToBMP(QRStructured *st, int sep, int mag, int order, int *size)
 				for (j = 0; j < dim; j++) {
 					if (qrIsBlack(st->qrs[pos], i, j)) {
 						for (jx = 0; jx < mag; jx++) {
-							*rptr |= 1 << pxshift;
 							qrBmpNextPixel();
 						}
 					} else {
 						for (jx = 0; jx < mag; jx++) {
+							*rptr |= 1 << pxshift;
 							qrBmpNextPixel();
 						}
 					}
-				}
-			}
+        }
+        for (j = 0; j < sepdim; j++) {
+          *rptr |= 1 << pxshift;
+          qrBmpNextPixel();
+        }
+      }
 			/* 行をmag回繰り返し書き込む */
 			for (ix = 0; ix < mag; ix++) {
 				memcpy(sptr, rbuf, (size_t)rsize);
@@ -258,7 +270,7 @@ qrsSymbolsToBMP(QRStructured *st, int sep, int mag, int order, int *size)
 	}
 	/* 分離パターン (上) */
 	if (sepskips) {
-		memset(sptr, 0, (size_t)sepskips);
+		memset(sptr, 0xff, (size_t)sepskips);
 		sptr += sepskips;
 	}
 
